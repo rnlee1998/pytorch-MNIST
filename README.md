@@ -1,10 +1,10 @@
 # pytorch-LeNeT-MNIST
 
 ## train
-python train.py agrs_train.txt
+python train.py args_train.txt
 
 ## test
-python test.py agrs_test.txt
+python test.py args_test.txt
 
 ## test a demo
 python demo.py
