@@ -1,9 +1,13 @@
 import torchvision
 from torchvision import transforms
 from torch.utils.data import DataLoader
-def MyDataloader(batch,mode='train',shuffle=False):   
+def MyDataloader(batch,model,mode='train',shuffle=False):   
     root = r"./"
-    trans_compose  = transforms.Compose([transforms.ToTensor(),
+    if model=='AlexNet':
+       trans_compose  = transforms.Compose([transforms.Resize(224),transforms.ToTensor(),
+                        ]) 
+    else:
+        trans_compose  = transforms.Compose([transforms.ToTensor(),
                         ])
     if mode=='train':
         dataset = torchvision.datasets.MNIST(root,train=True,transform=trans_compose,download=True)

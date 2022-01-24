@@ -17,8 +17,10 @@ def main():
   batch = args.batch
   if args.model=='LeNet':
       model = LeNet()
-  else:
+  elif args.model=='MLP':
       model = MLP()
+  elif args.model=='AlexNet':
+      model = AlexNet() 
   model.to(device)
   model.load_state_dict(torch.load("./checkpoints/LeNet_best.pth"))
   print(f"test the {args.model}...") 

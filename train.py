@@ -17,17 +17,19 @@ def main():
   device = torch.device('cuda')
   epochs = args.epochs
   batch = args.batch
-  lr=0.9
+  lr=0.01
   loss = nn.CrossEntropyLoss().to(device)
   if args.model=='LeNet':
       model = LeNet()
-  else:
+  elif args.model=='MLP':
       model = MLP()
+  elif args.model=='AlexNet':
+      model = AlexNet() 
   model.to(device)
   print(f"train the {args.model}...")
   optimizer = torch.optim.SGD(model.parameters(),lr) 
-  train_loader = MyDataloader(batch,mode = 'train',shuffle=True)
-  test_loader = MyDataloader(batch,mode = 'test',shuffle=False)
+  train_loader = MyDataloader(batch,model=args.model,mode = 'train',shuffle=True)
+  test_loader = MyDataloader(batch,model=args.model,mode = 'test',shuffle=False)
   best_metric = float('-inf')
   for epoch in range(epochs):
     train_loss = 0

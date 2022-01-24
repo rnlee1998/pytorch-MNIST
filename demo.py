@@ -15,11 +15,7 @@ test_images = []
 for i in range(10):
   for j in range(16):
     test_images.append(images_np[h//10*i:h//10+h//10*i,w//16*j:w//16*j+w//16])
-sample = test_images[77]
-sample_tensor = torch.tensor(sample).unsqueeze(0).unsqueeze(0).type(torch.FloatTensor).to(device)
-sample_tensor = torch.nn.functional.interpolate(sample_tensor,(28,28))
-predict = model(sample_tensor)
-output = predict.argmax()
+
 correct = 0
 i = 0
 cnt = 1
