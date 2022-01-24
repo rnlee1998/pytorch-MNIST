@@ -2,3 +2,4 @@ checkpoints/
 logs/
 MNIST/
 wandb/
+new.py

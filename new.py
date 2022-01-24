@@ -1,4 +1,8 @@
 import torch
 from model import *
-a = torch.randn(1,1,224,224)
-net = AlexNet()
+a = []
+a.append('a')
+a.append('12')
+a.append('lw')
+print(a)
+print(*a)
