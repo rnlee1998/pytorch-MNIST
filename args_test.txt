@@ -1,2 +1,2 @@
---batch 64
---model LeNet
+--batch 32
+--model VGG

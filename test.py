@@ -13,19 +13,25 @@ import sys
 import os
 
 def main():
-  device = torch.device('cuda')
-  batch = args.batch
-  if args.model=='LeNet':
-      model = LeNet()
-  elif args.model=='MLP':
-      model = MLP()
-  elif args.model=='AlexNet':
-      model = AlexNet() 
-  model.to(device)
-  model.load_state_dict(torch.load("./checkpoints/LeNet_best.pth"))
-  print(f"test the {args.model}...") 
-  test_loader = MyDataloader(batch,mode = 'test',shuffle=False)
-  with torch.no_grad():
+    device = torch.device('cuda')
+    batch = args.batch
+    if args.model=='LeNet':
+        model = LeNet()
+        model.load_state_dict(torch.load("./checkpoints/LeNet_best.pth"))
+    elif args.model=='MLP':
+        model = MLP()
+        model.load_state_dict(torch.load("./checkpoints/MLP_best.pth"))
+    elif args.model=='AlexNet':
+        model = AlexNet() 
+        model.load_state_dict(torch.load("./checkpoints/AlexNet_best.pth"))
+    elif args.model=='VGG':
+        model = VGG([(1,64),(1,128),(2,256),(2,512),(2,512)])
+        model.load_state_dict(torch.load("./checkpoints/VGG_best.pth"))
+    model.to(device)
+    model.eval()
+    print(f"test the {args.model}...") 
+    test_loader = MyDataloader(batch,model=args.model,mode = 'test',shuffle=False)
+    with torch.no_grad():
         correct_test=0
         for x,y in test_loader:
             [x,y] = [x.to(device),y.to(device)]

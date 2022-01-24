@@ -17,7 +17,7 @@ def main():
   device = torch.device('cuda')
   epochs = args.epochs
   batch = args.batch
-  lr=0.01
+  lr=0.05
   loss = nn.CrossEntropyLoss().to(device)
   if args.model=='LeNet':
       model = LeNet()
@@ -25,6 +25,8 @@ def main():
       model = MLP()
   elif args.model=='AlexNet':
       model = AlexNet() 
+  elif args.model=='VGG':
+      model = VGG([(1,64),(1,128),(2,256),(2,512),(2,512)])
   model.to(device)
   print(f"train the {args.model}...")
   optimizer = torch.optim.SGD(model.parameters(),lr) 
@@ -84,7 +86,7 @@ if __name__=='__main__':
   parser.convert_arg_line_to_args = convert_arg_line_to_args
   parser.add_argument('--batch',default=64, type=int,help='batch size')
   parser.add_argument('--epochs',default=15, type=int,help='train epochs')
-  parser.add_argument('--model',default='LeNet',help='choose from LeNet, MLP')
+  parser.add_argument('--model',default='LeNet',help='choose from LeNet, MLP,AlexNet,VGG')
   parser.add_argument('--checkpoints',default='./checkpoints',help='model save dir')
   if sys.argv.__len__() == 2:
     arg_filename_with_prefix = '@' + sys.argv[1]
