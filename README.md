@@ -1,9 +1,10 @@
-# pytorch-LeNeT-MNIST
+# pytorch--MNIST
 
 ## Learning rate set
 |model| lr|
 |--|--|
-|LeNet、MLP|0.9|
+|MLP|0.9|
+|LeNet|0.9|
 |AlexNet |0.01|
 
 ## train
