@@ -31,8 +31,10 @@ def main():
       model = AlexNet() 
   elif args.model=='VGG':
       model = VGG([(1,64),(1,128),(2,256),(2,512),(2,512)])
+  elif args.model=='ResNet':
+      model = ResNet()
   model.to(device)
-  #model.apply(xavier) 
+  model.apply(xavier) 
   print(f"train the {args.model}...")
   optimizer = torch.optim.SGD(model.parameters(),lr) 
   train_loader = MyDataloader(batch,model=args.model,mode = 'train',shuffle=True)

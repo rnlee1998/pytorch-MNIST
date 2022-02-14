@@ -27,6 +27,9 @@ def main():
     elif args.model=='VGG':
         model = VGG([(1,64),(1,128),(2,256),(2,512),(2,512)])
         model.load_state_dict(torch.load("./checkpoints/VGG_best.pth"))
+    elif args.model=='ResNet':
+        model = ResNet()
+        model.load_state_dict(torch.load("./checkpoints/ResNet_best.pth"))        
     model.to(device)
     model.eval()
     print(f"test the {args.model}...") 

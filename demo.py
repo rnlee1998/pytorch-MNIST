@@ -15,7 +15,7 @@ def convert_arg_line_to_args(arg_line):
 
 parser = argparse.ArgumentParser(description='demo', fromfile_prefix_chars='@')
 parser.convert_arg_line_to_args = convert_arg_line_to_args
-parser.add_argument('--model',default='VGG',help='choose from LeNet, MLP,AlexNet,VGG')
+parser.add_argument('--model',default='ResNet',help='choose from LeNet, MLP,AlexNet,VGG')
 parser.add_argument('--checkpoints',default='./checkpoints',help='model save dir')
 if sys.argv.__len__() == 2:
   arg_filename_with_prefix = '@' + sys.argv[1]
@@ -36,11 +36,14 @@ elif args.model=='AlexNet':
 elif args.model=='VGG':
     model = VGG([(1,64),(1,128),(2,256),(2,512),(2,512)]).to(device)
     model.load_state_dict(torch.load("./checkpoints/VGG_best.pth"))
+elif args.model=='ResNet':
+    model = ResNet()
+    model.load_state_dict(torch.load("./checkpoints/ResNet_best.pth")) 
 model.to(device)
 model.eval()
 if args.model=='MLP' or args.model=='LeNet':
     resize_H,resize_W=28,28
-elif args.model=='AlexNet' or args.model=='VGG':
+elif args.model=='AlexNet' or args.model=='VGG' or args.model=='ResNet':
     resize_H,resize_W=224,224
 
 images_np = cv2.imread("./R-C.png",cv2.IMREAD_GRAYSCALE)
