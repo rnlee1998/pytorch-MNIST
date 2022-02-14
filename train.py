@@ -13,6 +13,10 @@ import sys
 import os
 # wandb.init(project="pytorch-intro")# 项目名称
 
+def xavier(m):
+    if type(m) == nn.Linear or type(m)==nn.Conv2d:
+        nn.init.xavier_uniform_(m.weight)      
+
 def main():
   device = torch.device('cuda')
   epochs = args.epochs
@@ -28,6 +32,7 @@ def main():
   elif args.model=='VGG':
       model = VGG([(1,64),(1,128),(2,256),(2,512),(2,512)])
   model.to(device)
+  #model.apply(xavier) 
   print(f"train the {args.model}...")
   optimizer = torch.optim.SGD(model.parameters(),lr) 
   train_loader = MyDataloader(batch,model=args.model,mode = 'train',shuffle=True)
